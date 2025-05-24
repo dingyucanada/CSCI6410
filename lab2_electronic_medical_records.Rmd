@@ -32,7 +32,7 @@ dplyr::glimpse(raw.data)
 There is no explanation or data dictionary with this dataset, which is a surprisingly common and frustrating turn of events!  
 
 **1** Using the output of dplyr's `glimpse` command (or rstudio's data viewer by clicking on `raw.data` in the Environment pane) provide a description of what you think each variable in this dataset contains.
-
+**Answer:**  
 - note_id: Unique identifier for each medical note.
 - description: Brief summary of the patient's case.
 - medical_specialty: The medical specialty related to the note (e.g., Surgery).
@@ -186,8 +186,6 @@ There are more unique unigrams in Surgery than Orthopedic and Radiology, reflect
 
 The number of unique bigrams is highest in Surgery, followed by Orthopedic, then Radiology, which suggests more varied phrase usage in surgical documentation.
 
-
-
 ```{r}
 tokenized.data.bigram <- analysis.data %>%
   tidytext::unnest_tokens(bigram, transcription, token = "ngrams", n = 2, to_lower = TRUE) %>%
@@ -225,9 +223,11 @@ knitr::kable(bigrams)
 ```
 
 
-Sometimes we are interested in tokenising/segmenting things other than words like whole sentences or paragraphs.  
+Sometimes we are interested in tokenising/segmenting things other than words like whole sentences or paragraphs. 
+
 **4** How many unique sentences are there in each category? Hint: use `?tidytext::unnest_tokens` to see the documentation for this function.
 
+**Answer:**  
 There are 1087 unique sentences in Surgery, 354 in Orthopedic, and 273 in Radiology.
 
 
@@ -267,7 +267,7 @@ knitr::kable(sent_counts)
 
 
 **5** Do you think a general purpose lemmatizer will work well for medical data? Why might it not?
-
+**Answer:**  
 No, general-purpose lemmatizers usually miss medical terms and abbreviations. Medical text has a lot of specialized language that general models don't recognize.
 
 
@@ -306,7 +306,7 @@ ggplot2::ggplot(lemma.freq, ggplot2::aes(x=proportion,
   ggplot2:: labs(y="Orthopedic", x = NULL)
 ```
 **6** What does this plot tell you about the relative similarity of lemma frequencies between Surgery and Orthopedic and between radiology and Surgery? Based on what these specialties involve, is this what you would expect?
-
+**Answer:**  
 Orthopedic and Surgery have very similar lemma frequencies, while Radiology is different. This matches our expectations since the first two both describe procedures and use similar words, while Radiology uses more imaging-specific terms.
 
 
@@ -379,7 +379,7 @@ The scatter plot compares lemma usage in Surgery and Radiology. Most points fall
 
 
 **8** Are there any lemmas that stand out in these lists? Why or why not?
-
+**Answer:**  
 Yes, many top tf-idf lemmas are highly specific to each specialty, like "carotid artery" in Radiology or "steri strips" in Orthopedic.
 
 
